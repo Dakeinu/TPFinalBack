@@ -3,63 +3,42 @@
 namespace App\Http\Controllers;
 
 use App\Models\Choice;
-use App\Http\Requests\StoreChoiceRequest;
-use App\Http\Requests\UpdateChoiceRequest;
+use Illuminate\Http\Request;
 
 class ChoiceController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     public function index()
     {
-        //
+        return Choice::all();
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \App\Http\Requests\StoreChoiceRequest  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(StoreChoiceRequest $request)
+    public function store(Request $request)
     {
-        //
+        $choice = Choice::create($request->all());
+        return response()->json($choice, 201);
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Choice  $choice
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Choice $choice)
+    public function show(Choice $id)
     {
-        //
+        return Choice::find($id)
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \App\Http\Requests\UpdateChoiceRequest  $request
-     * @param  \App\Models\Choice  $choice
-     * @return \Illuminate\Http\Response
-     */
-    public function update(UpdateChoiceRequest $request, Choice $choice)
+    public function update(Request $request, Choice $id)
     {
-        //
+        $choice = Choice::findOrFail($id);
+        $choice->update($request->all());
+        return response()->json($choice, 200);    }
+
+    public function destroy(Choice $id)
+    {
+        Choice::findOrFail($id)->delete();
+        return response(['message' => 'Deleted Successfully'], 200);
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Choice  $choice
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Choice $choice)
+    public function get_choice(Question $question_id)
     {
-        //
+        $choice = Choice::where('question_id', $question_id)->get();
+        return response(200);
     }
 }

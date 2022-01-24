@@ -8,58 +8,8 @@ use App\Http\Requests\UpdateScoreRequest;
 
 class ScoreController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        //
+    public function getScores(){
+        return Score::all();
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \App\Http\Requests\StoreScoreRequest  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(StoreScoreRequest $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Score  $score
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Score $score)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \App\Http\Requests\UpdateScoreRequest  $request
-     * @param  \App\Models\Score  $score
-     * @return \Illuminate\Http\Response
-     */
-    public function update(UpdateScoreRequest $request, Score $score)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Score  $score
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Score $score)
-    {
-        //
-    }
 }

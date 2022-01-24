@@ -11,6 +11,6 @@ class Choice extends Model
     protected $fillable = ['label', 'question_id'];
 
     public function questions(){
-        return $this->belongsTo('Question');
+        return $this->belongsTo(Question::class);
     }
 }

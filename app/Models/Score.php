@@ -11,10 +11,10 @@ class Score extends Model
     protected $fillable = ['score', 'quiz_id', 'user_id'];
 
     public function user(){
-        return $this->belongsTo('User');
+        return $this->belongsTo(User::class);
     }
 
     public function quiz(){
-        return $this->belongsTo('Quiz');
+        return $this->belongsTo(Quiz::class);
     }
 }

@@ -6,6 +6,7 @@ use App\Http\Controllers\QuestionController;
 use App\Http\Controllers\QuizController;
 use App\Http\Controllers\ScoreController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\UserController;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -21,25 +22,21 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-// Route::get('/', ['QuizController@index']);
-Route::get('/', [QuizController::class, 'get_quizzes_published']);
-Route::get('/admin', [QuizController::class, 'get_all_quizzes']);
-Route::get('/scores', [ScoreController::class, 'get_scores']);
-Route::post('/new-quiz', [QuizController::class, 'new_quiz']);
-Route::put('/edit-quiz/{id}', [QuizController::class, 'edit_quiz']);
-Route::post('/take-quiz/{id}', [QuizController::class, 'take_quiz']);
 
+Route::get('/user/{userId}',[UserController::class,'getUser']);
 
-Route::apiResource('/choices', ChoiceController::class);
-Route::apiResource('/questions', QuestionController::class);
-Route::apiResource('/quizzes', QuizController::class);
-Route::apiResource('/scores', ScoreController::class);
+Route::post('/quiz', [QuizController::class, 'addQuiz']);
+Route::put('/quiz/{quizId}', [QuizController::class, 'editQuiz']);
+Route::delete('/quiz/{quizId}', [QuizController::class, 'removeQuiz']);
+Route::post('/quiz/{quizId}/publish', [QuizController::class,'publish']);
+Route::post('/quiz/{quizId}/unpublish', [QuizController::class,'unpublish']);
 
-
-// Route::apiResource('quiz', 'QuizController');
-
-// Route::apiResource('question', 'QuestionController');
-// Route::apiResource('choice', 'ChoiceController');
+Route::get('/score', [ScoreController::class, 'getScores']);
+Route::get('/quiz', [QuizController::class, 'getQuizzes']);
+Route::get('/quiz/{quizId}', [QuizController::class, 'getQuiz']);
+Route::get('/quiz/{quizId}/questions', [QuizController::class, 'getQuestions']);
+Route::get('/question/{questionId}/choices', [QuestionController::class, 'getChoices']);
+Route::post('/score', [QuizController::class, 'submitQuiz']);
 
 Route::group([
     'middleware' => 'api',
