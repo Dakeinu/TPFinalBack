@@ -1,3 +1,5 @@
+Participants : Angel Tocny | Falcati Rémi
+
 # Installer les dépendences
 composer install
 
